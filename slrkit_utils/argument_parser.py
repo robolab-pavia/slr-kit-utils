@@ -111,6 +111,20 @@ class AppendMultiplePairsAction(SlrKitAction):
         setattr(namespace, self.dest, pairs)
 
 
+class ValidateInt(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+        try:
+            v = int(values)
+        except ValueError:
+            parser.exit(1, f'Value {values!r} is not a valid int')
+            return
+
+        if v <= 0:
+            parser.exit(1, f'{self.dest!r} must be greater than 0')
+
+        setattr(namespace, self.dest, v)
+
+
 class ArgParse(argparse.ArgumentParser):
     """
     Custom ArgumentParser that allows to collect and retrieve information about
