@@ -233,6 +233,7 @@ class ArgParse(argparse.ArgumentParser):
                 'cli_only': cli_only,
                 'input': is_input,
                 'output': is_output,
+                'action': ret,
             }
 
         return ret
